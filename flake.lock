@@ -401,11 +401,11 @@
         "tag": "tag"
       },
       "locked": {
-        "lastModified": 1649041511,
-        "narHash": "sha256-NQc34koCHHFg7g16GP/m5SpwOyMIluNInc/muME/W8M=",
+        "lastModified": 1649045173,
+        "narHash": "sha256-D0wdcv86OYc79YsFqwE71cLlJfEEsC4nkypYXXW6EJw=",
         "owner": "thelonelyghost",
         "repo": "workstation-deps-nix",
-        "rev": "362e063e9724f114ed5a25863e560cdbd4c8d2f6",
+        "rev": "072f85d0d4d8ba808324f67974e4ec967647223c",
         "type": "github"
       },
       "original": {
