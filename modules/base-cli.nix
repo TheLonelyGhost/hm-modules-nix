@@ -4,6 +4,7 @@
 {
   home.packages = [
     pkgs.coreutils
+    pkgs.nix-doc
     workstation-deps.pbcopy
     workstation-deps.pbpaste
   ];
