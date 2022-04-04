@@ -4,6 +4,8 @@
 {
   home.packages = [
     pkgs.coreutils
+    workstation-deps.pbcopy
+    workstation-deps.pbpaste
   ];
   home.sessionPath = [
     "${homeDirectory}/.local/bin"
