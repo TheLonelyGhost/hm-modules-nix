@@ -50,15 +50,11 @@
 
       fetch.prune = true;
 
-      rebase = {
-        autoSquash = true;
-        autoStash = true;
-      };
+      rebase.autoSquash = true;
+      rebase.autoStash = true;
 
       rerere.enabled = true;
       status.submodulesummary = true;
-
-      credential.helper = "${workstation-deps.git-credential-keepassxc}/bin/git-credential-keepassxc";
     };
 
     ignores = [

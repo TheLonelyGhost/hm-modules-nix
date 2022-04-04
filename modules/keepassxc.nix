@@ -4,6 +4,7 @@
 {
   home.packages = [
     workstation-deps.keepassxc-get
+    workstation-deps.git-credential-keepassxc
   ] ++ (pkgs.lib.optional (!isWSL) [
     pkgs.keepassxc
   ]);
@@ -11,4 +12,5 @@
   eval "$(${workstation-deps.wsl-keepassxc-relay}/bin/keepassxc-relay '${windowsUsername}')"
   '';
 
+  programs.git.extraConfig.credential.helper = "${workstation-deps.git-credential-keepassxc}/bin/git-credential-keepassxc";
 }
