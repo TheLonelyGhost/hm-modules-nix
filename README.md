@@ -4,22 +4,22 @@ A Nix Flake that contains composable modules (and default args) for highly opini
 
 ## Usage
 
+Ensure setup is complete, [per the manual](https://nix-community.github.io/home-manager/index.html#ch-nix-flakes), to make `home-manager` work with [Nix Flakes](https://nixos.wiki/wiki/Flakes).
+
+Put contents that look something like this in a file called `~/.config/nixpkgs/flake.nix`, creating parent directories as necessary:
+
 ```nix
 {
   description = "A very basic flake";
 
   inputs = {
     nixpkgs.url = "flake:nixpkgs";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-utils.url = "github:numtide/flake-utils";
-    flake-compat = {
-      url = "github:edolstra/flake-compat";
-      flake = false;
-    };
+    flake-compat.url = "github:edolstra/flake-compat";
+    flake-compat.flake = false;
 
     hm-modules-nix.url = "github:thelonelyghost/hm-modules-nix";
     hm-modules-nix.inputs.nixpkgs.follows = "nixpkgs";
@@ -32,6 +32,7 @@ A Nix Flake that contains composable modules (and default args) for highly opini
         system = pkgs.system;
         hm-modules = hm-modules-nix.packages."${system}";
       in {
+        # This is where all the configuration for all platforms, consistently, happens
         configuration = { pkgs, homeDirectory, ... }: {
           programs.home-manager.enable = true;
 
@@ -62,6 +63,11 @@ A Nix Flake that contains composable modules (and default args) for highly opini
     in
     {
       homeConfigurations = {
+        # Everything in this section should be replaced with your own settings, following similar
+        # structure. Placeholders have been inserted to show what should be present and you should
+        # replace it with your own system information.
+
+        # Any number of these that you want, following `username@hostname` pattern for the key
         "jdoe@localhost" = home-manager.lib.homeManagerConfiguration (
           let
             pkgs = import nixpkgs {
@@ -108,3 +114,13 @@ A Nix Flake that contains composable modules (and default args) for highly opini
     };
 }
 ```
+
+When that is put in place, run the following command:
+
+```console
+$ cd ~/.config/nixpkgs
+$ nix flake build '.#homeConfigurations."'"$(whoami)@$(hostname)"'".activationPackage'
+$ ./result/bin/activate && rm ./result
+```
+
+Any subsequent commands can run `home-manager switch` instead.
