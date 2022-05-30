@@ -51,6 +51,7 @@
           ssh = import ./modules/ssh.nix;
           keepassxc = import ./modules/keepassxc.nix;
           starship = import ./modules/starship.nix;
+          taskwarrior = import ./modules/taskwarrior.nix;
           tmux = import ./modules/tmux.nix;
           zsh = import ./modules/zsh.nix;
         };
